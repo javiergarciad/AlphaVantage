@@ -25,11 +25,11 @@
         <form action="" method="post" novalidate>
             {{ db_form.hidden_tag() }}
             <p>
-                {{ db_form.name.label }}<br>
+                {{ db_form.name.label }}:
                 {{ db_form.name(size=32) }}
             </p>
             <p>
-                {{ db_form.driver.label }}<br>
+                {{ db_form.driver.label }}:
                 {{ db_form.driver(size=32) }}
             </p>
 
