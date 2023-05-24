@@ -1,7 +1,6 @@
 import os
+from pathlib import Path
 import secrets
-
-basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config(object):
@@ -11,7 +10,7 @@ class Config(object):
     # Alpha Advantage api key
     API_KEY = os.environ.get('API_KEY') or None
     # Sqlite database configuration
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'sqlite:///' + os.path.join(basedir, 'app.db')
+    DB_NAME = "app.db"
+    DB_ENGINE = "sqlite3"
+    SQLALCHEMY_DATABASE_URI = f"sqlite:///{Path(__file__).parent.absolute()}/{DB_NAME}"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    
