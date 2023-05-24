@@ -8,7 +8,7 @@ class Config(object):
     # this is suitable here becasuse we are not storing sessions
     SECRET_KEY = secrets.token_hex(16)
     # Alpha Advantage api key
-    API_KEY = os.environ.get('API_KEY') or None
+    API_KEY = os.environ.get("API_KEY") or None
     # Sqlite database configuration
     DB_NAME = "app.db"
     DB_ENGINE = "sqlite3"

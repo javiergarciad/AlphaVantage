@@ -1,6 +1,7 @@
 import sqlalchemy
 from app import db
 
+
 def test_db():
     """
     Tests if the database is accessible and all tables exists
@@ -13,4 +14,3 @@ def test_db():
         return True, "Responsive"
     except:
         return False, "Unresponsive"
-

@@ -1,45 +1,21 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="description" content=">Alpha Advantage Market Data">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-        <title>Alpha Advantage Market Data</title>
-    </head>
-    <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-        <div>
-            <H1>Alpha Advantage Market Data</H1>
-            <hr>
-        </div>
-        <div>
+{% extends "base.html" %} {% block content %}
+<div>
+  <h1>Alpha Advantage Market Data</h1>
+  <hr />
+</div>
+<div>
+  <h2>Database Status</h2>
+  <p>Name</p>
 
-        <h2>Database Status</h2>
-        <p>Name </p>
+  <form action="" method="post" novalidate>
+    {{ db_form.hidden_tag() }}
+    <p>{{ db_form.start() }}</p>
+    <p>{{ db_form.delete() }}</p>
+    <p>{{ db_form.update() }}</p>
+  </form>
 
-        <form action="" method="post" novalidate>
-            {{ db_form.hidden_tag() }}
-            <p>{{ db_form.start() }}</p>
-            <p>{{ db_form.delete() }}</p>
-            <p>{{ db_form.update() }}</p>
-        </form>
+  <hr />
+</div>
+<div></div>
 
-        <hr>
-    </div>
-    <div>
-
-    </div>
-
-
-
-        <script src="" async defer></script>
-    </body>
-</html>
+{% endblock %}
