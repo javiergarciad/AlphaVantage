@@ -16,7 +16,30 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <h1>HELLO JAVIER</h1>
+        <div>
+            <H1>Alpha Advantage Market Data</H1>
+            <hr>
+        </div>
+        <div>
+
+        <form action="" method="post" novalidate>
+            {{ db_form.hidden_tag() }}
+            <p>
+                {{ db_form.name.label }}<br>
+                {{ db_form.name(size=32) }}
+            </p>
+            <p>
+                {{ db_form.driver.label }}<br>
+                {{ db_form.driver(size=32) }}
+            </p>
+
+            <p>{{ db_form.start() }}</p>
+            <p>{{ db_form.delete() }}</p>
+        </form>
+    </div>
+
+
+
 
         <script src="" async defer></script>
     </body>
