@@ -22,27 +22,21 @@
         </div>
         <div>
 
+        <h2>Database Status</h2>
+        <p>Name </p>
+
         <form action="" method="post" novalidate>
             {{ db_form.hidden_tag() }}
-            <p>
-                {{ db_form.name.label }}:
-                {{ db_form.name(size=32) }}
-            </p>
-            <p>
-                {{ db_form.driver.label }}:
-                {{ db_form.driver(size=32) }}
-            </p>
-            <p>
-                {{ db_form.status.label }}:
-                {{ db_form.status(size=32) }}
-            </p>
-
-
             <p>{{ db_form.start() }}</p>
             <p>{{ db_form.delete() }}</p>
+            <p>{{ db_form.update() }}</p>
         </form>
-    </div>
 
+        <hr>
+    </div>
+    <div>
+
+    </div>
 
 
 

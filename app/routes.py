@@ -1,20 +1,28 @@
-from flask import render_template
+from flask import render_template, request
 from app import app
-from app.forms import DatabaseForm, UpdateForm
+from app.forms import DatabaseForm
 from app.tools import test_db
 from config import Config
 
 
-@app.route("/")
-@app.route("/index")
+@app.route("/", methods=['GET', 'POST'])
 def index():
     db_name = Config().DB_NAME
-    db_drive = Config().DB_ENGINE
+    db_engine = Config().DB_ENGINE
     db_status = test_db()[1]
 
     db_form = DatabaseForm()
-    update_form = UpdateForm()
+
     symbols = {}
+
+    if request.method == 'POST' and db_form.validate():
+        if "start" in request.form.keys():
+            print("start")
+        elif  "delete" in request.form.keys():
+            print("delete")
+        elif  "update" in request.form.keys():
+            print("update")
+
 
 
     return render_template(
@@ -22,12 +30,25 @@ def index():
         title="Alpha Vantage",
         # database status info
         db_name=db_name,
-        db_drive=db_drive,
+        db_engine=db_engine,
         db_status=db_status,
         db_form=db_form,
-        # update form
-        update_form=update_form,
+
         # symbosl data
         symbols=symbols,
     )
 
+
+@app.route("/db_start", methods=["POST"])
+def db_start():
+    return "start"
+
+
+@app.route("/db_delete", methods=["POST"])
+def db_delete():
+    return "delete"
+
+
+@app.route("/db_update_all", methods=["POST"])
+def db_update_all():
+    return "update all"
