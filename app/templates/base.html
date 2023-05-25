@@ -13,23 +13,27 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href={{ url_for('static', filename='main.css') }} />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     {{ bootstrap.load_css() }}
-    {% include "style.html" %}
-    
+
     <title>Alpha Vantage Market Data</title>
     {% endblock %}
   </head>
   <body>
-    <!--[if lt IE 7]>
-      <p class="browsehappy">
-        You are using an <strong>outdated</strong> browser. Please
-        <a href="#">upgrade your browser</a> to improve your experience.
-      </p>
-    <![endif]-->
-
     <!-- Your page content -->
-    {% block content %}{% endblock %} {% block scripts %}
-    <!-- Optional JavaScript -->
-    {{ bootstrap.load_js() }} {% endblock %}
+    {% block content %}{% endblock %}
+
+    <!-- JavaScript -->
+
+    {% block scripts %} {{ bootstrap.load_js() }}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+    <script src={{ url_for('static', filename='main.js') }}></script>
+    {% endblock %}
   </body>
 </html>

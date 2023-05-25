@@ -12,9 +12,8 @@ def db_info():
     symbols = len(Symbol.query.all())
     records = len(DailyBar.query.all())
     # last_update = db.session.execute(DailyBar.updated).scalar()
-        # .order_by(sqlalchemy.desc(DailyBar.updated))
-        # .first()
-
+    # .order_by(sqlalchemy.desc(DailyBar.updated))
+    # .first()
 
     return {
         "url": url,
@@ -22,3 +21,4 @@ def db_info():
         "records": records,
         "last_update": "TO DO",
     }
+
