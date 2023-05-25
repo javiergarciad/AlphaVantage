@@ -7,6 +7,6 @@ class DatabaseForm(FlaskForm):
     Form to monitor database status
     """
 
-    start = SubmitField("Start")
+    start = SubmitField("Start New Database")
     delete = SubmitField("Delete")
     update = SubmitField("Update")

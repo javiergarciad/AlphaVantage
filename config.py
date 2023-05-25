@@ -5,8 +5,8 @@ import secrets
 
 class Config(object):
     # generate a secret key each time the server is iniciated.
-    # this is suitable here becasuse we are not storing sessions
-    SECRET_KEY = secrets.token_hex(16)
+    # this is suitable here becasuse we are nsecrets.token_hex(16)ot storing sessions
+    SECRET_KEY = '9df31cad3eb2f66386575da6dd6641ae'
     # Alpha Advantage api key
     API_KEY = os.environ.get("API_KEY") or None
     # Sqlite database configuration

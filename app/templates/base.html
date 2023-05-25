@@ -12,11 +12,10 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-
-    {% block styles %}
     <!-- Bootstrap CSS -->
-    {{ bootstrap.load_css() }} {% endblock %}
-
+    {{ bootstrap.load_css() }}
+    {% include "style.html" %}
+    
     <title>Alpha Vantage Market Data</title>
     {% endblock %}
   </head>

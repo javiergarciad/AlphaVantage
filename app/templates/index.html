@@ -1,21 +1,79 @@
-{% extends "base.html" %} {% block content %}
-<div>
-  <h1>Alpha Advantage Market Data</h1>
-  <hr />
-</div>
-<div>
-  <h2>Database Status</h2>
-  <p>Name</p>
+{% extends "base.html" %} {% from 'bootstrap5/form.html' import render_field  %}
+{% block content %}
+<body>
 
-  <form action="" method="post" novalidate>
-    {{ db_form.hidden_tag() }}
-    <p>{{ db_form.start() }}</p>
-    <p>{{ db_form.delete() }}</p>
-    <p>{{ db_form.update() }}</p>
-  </form>
 
-  <hr />
-</div>
-<div></div>
 
-{% endblock %}
+  <div class="col-lg-8 mx-auto p-4 py-md-5">
+    <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
+      <span class="fs-4">Market Data</span>
+    </header>
+
+    <main>
+      <h1 class="text-body-emphasis">Market Data from Alpha Advantage</h1>
+      <p class="fs-5 col-md-8">
+        This script will update a SQlite database that you can query with any tool.
+        Only includes calls to the "Daily" endpoint for last 250 trading days,
+        but any other configuration can be implemented and displayed as requested.
+      </p>
+
+
+
+      <hr class="col-3 col-md-2 mb-5" />
+
+      <div class="row g-5">
+        <div class="col-md-6">
+          <h2 class="text-body-emphasis">Database</h2>
+          <p>Check the status of the database. Start it if is unresponsive,
+            delete it if you feel like it,
+            update as necessary.</p>
+            <ul>
+                <li>Name: {{ db_name }}</li>
+                <li>Engine: {{ db_engine }}</li>
+                <li>Status: {{ db_status[1] }}</li>
+            </ul>
+
+            <form method="post">
+                {{ db_form.csrf_token() }}
+
+                <!-- Disable start if database already exist -->
+                {% if db_status[0] %}
+                    {{ render_field(db_form.delete, button_style='danger') }}
+                    {{ render_field(db_form.update, button_style='success') }}
+                {% else %}
+                    {{ render_field(db_form.start) }}
+                {% endif%}
+
+            </form>
+          </p>
+
+        </div>
+
+        <div class="col-md-6">
+          <h2 class="text-body-emphasis">Status</h2>
+          <p>
+            Read more detailed instructions and documentation on GitHub
+
+          </p>
+
+        </div>
+      </div>
+
+      <hr class="col-3 col-md-2 mb-5" />
+      <div class="row g-5">
+
+        symbols here
+
+      </div>
+
+
+
+
+    </main>
+    <footer class="pt-5 my-5 text-body-secondary border-top">
+      Created by the Javier Garcia &middot; &copy; 2023
+    </footer>
+  </div>
+
+  {% endblock %}
+</body>
