@@ -1,5 +1,11 @@
-{% extends "base.html" %} {% from 'bootstrap5/form.html' import render_field  %}
+{% extends "base.html" %}
+{% from 'bootstrap5/form.html' import render_field, render_form %}
+{% from 'bootstrap5/utils.html' import render_messages %}
+
 {% block content %}
+
+{{ render_messages() }}
+
 <body>
 
   <div class="col-lg-10 mx-auto p-4 py-md-5">
@@ -50,7 +56,8 @@
           <h2 class="text-body-emphasis">Symbols</h2>
           <p>Manage your symbols here.</p>
 
-          
+          {{ render_form(tickets_form, form_type="inline", action="add_ticket", method="Post") }}
+
 
         </div>
       </div>
