@@ -1,24 +1,24 @@
 import sqlalchemy
 from app import db
 from config import Config
+from app.models import Symbol, DailyBar
 
 
-def test_db():
+def db_info():
     """
-    Tests if the database is accessible and all tables exists
+    Returns the database information
     """
-    try:
-        a = sqlalchemy.inspect(db.engine).has_table("alembic_version")
-        b = sqlalchemy.inspect(db.engine).has_table("symbol")
-        c = sqlalchemy.inspect(db.engine).has_table("daily_bar")
-
-        if a and b and c:
-            return True, "Responsive"
-        else:
-            return False, "Unresponsive"
-    except:
-        return False, "Unresponsive"
+    url = Config.SQLALCHEMY_DATABASE_URI
+    symbols = len(Symbol.query.all())
+    records = len(DailyBar.query.all())
+    # last_update = db.session.execute(DailyBar.updated).scalar()
+        # .order_by(sqlalchemy.desc(DailyBar.updated))
+        # .first()
 
 
-
-
+    return {
+        "url": url,
+        "symbols": symbols,
+        "records": records,
+        "last_update": "TO DO",
+    }

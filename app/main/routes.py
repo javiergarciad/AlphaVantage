@@ -1,15 +1,13 @@
 from flask import render_template, request
 from app.main.forms import DatabaseForm
-from app.main.tools import test_db
-from config import Config
+from app.main.tools import db_info
+
 from app.main import bp
 
 
 @bp.route("/", methods=['GET', 'POST'])
 def index():
-    db_name = Config().SQLALCHEMY_DATABASE_URI
-
-
+    
     db_form = DatabaseForm()
 
     symbols = {}
@@ -26,7 +24,7 @@ def index():
         "index.html",
         title="Alpha Vantage",
         # database status info
-        db_name=db_name,
+        db_info=db_info(),
         db_form=db_form,
 
         # symbosl data

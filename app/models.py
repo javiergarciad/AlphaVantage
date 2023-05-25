@@ -6,16 +6,14 @@ from app import db
 
 class Base(db.Model):
     __abstract__ = True
-
-    updated = db.Column(
-        db.DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow
-    )
-
+    pass
 
 class DailyBar(Base):
     """
     Represents a daily bar in the database.
     """
+    __tablename__ = "daily_bar"
+
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.Date, nullable=False)
     symbol = db.Column(db.String(10), db.ForeignKey("symbol.symbol"), nullable=False)
@@ -26,8 +24,6 @@ class DailyBar(Base):
     volume = db.Column(db.Integer, nullable=False)
     created = db.Column(db.DateTime, default=datetime.utcnow)
     updated = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-
-
 
     def __repr__(self):
         return f"{self.date} - {self.symbol}: O:{self.open:.2f}, H:{self.high:.2f}, \
@@ -43,9 +39,7 @@ class Symbol(Base):
     symbol = db.Column(db.String(10), nullable=False)
     created = db.Column(db.DateTime, default=datetime.utcnow)
     updated = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    daily_bars = db.relationship(
-        "DailyBar", backref="symbol", lazy="dynamic", cascade="all, delete-orphan"
-    )
+    daily_bars = db.relationship("DailyBar")
 
     def __repr__(self):
         return f"{self.symbol}"

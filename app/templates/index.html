@@ -2,7 +2,7 @@
 {% block content %}
 <body>
 
-  <div class="col-lg-8 mx-auto p-4 py-md-5">
+  <div class="col-lg-10 mx-auto p-4 py-md-5">
     <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
       <span class="fs-4">Market Data</span>
     </header>
@@ -15,16 +15,25 @@
         but any other configuration can be implemented and displayed as requested.
       </p>
 
-      <hr class="col-3 col-md-2 mb-5" />
+      <hr class="col-4 col-md-2 mb-5" />
 
       <div class="row g-5">
         <div class="col-md-6">
           <h2 class="text-body-emphasis">Database</h2>
-          <p>Check the status of the database. Start it if is unresponsive,
-            delete it if you feel like it,
-            update as necessary.</p>
+          <p>Some information about the database.</p>
 
-            <p><small>{{ db_name }}</small></p>
+          <dl class="row">
+            <dt class="col-sm-3">URL</dt>
+            <dd class="col-sm-9">{{ db_info['url'] }}</dd>
+            <dt class="col-sm-3">Total symbols</dt>
+            <dd class="col-sm-9">{{ db_info['symbols'] }}</dd>
+            <dt class="col-sm-3">Total records</dt>
+            <dd class="col-sm-9">{{ db_info['records'] }}</dd>
+            <dt class="col-sm-3">Last update</dt>
+            <dd class="col-sm-9">{{ db_info['last_update'] }}</dd>
+          </dl>
+
+
 
 
             <form method="post">
@@ -38,11 +47,10 @@
         </div>
 
         <div class="col-md-6">
-          <h2 class="text-body-emphasis">Status</h2>
-          <p>
-            Read more detailed instructions and documentation on GitHub
+          <h2 class="text-body-emphasis">Symbols</h2>
+          <p>Manage your symbols here.</p>
 
-          </p>
+          
 
         </div>
       </div>
