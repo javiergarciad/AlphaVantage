@@ -23,22 +23,14 @@
           <p>Check the status of the database. Start it if is unresponsive,
             delete it if you feel like it,
             update as necessary.</p>
-            <ul>
-                <li>Name: {{ db_name }}</li>
-                <li>Engine: {{ db_engine }}</li>
-                <li>Status: {{ db_status[1] }}</li>
-            </ul>
+
+            <p><small>{{ db_name }}</small></p>
+
 
             <form method="post">
                 {{ db_form.csrf_token() }}
-
-                <!-- Disable start if database already exist -->
-                {% if db_status[0] %}
-                    {{ render_field(db_form.delete, button_style='danger') }}
-                    {{ render_field(db_form.update, button_style='success') }}
-                {% else %}
-                    {{ render_field(db_form.start) }}
-                {% endif%}
+                {{ render_field(db_form.delete, button_style='danger') }}
+                {{ render_field(db_form.update, button_style='success') }}
 
             </form>
           </p>

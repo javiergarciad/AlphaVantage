@@ -24,8 +24,8 @@ class DailyBar(Base):
     low = db.Column(DECIMAL(10, 6), nullable=False)
     close = db.Column(DECIMAL(10, 6), nullable=False)
     volume = db.Column(db.Integer, nullable=False)
-    created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    updated = db.Column(db.DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created = db.Column(db.DateTime, default=datetime.utcnow)
+    updated = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
 
 
@@ -41,8 +41,8 @@ class Symbol(Base):
     """
     id = db.Column(db.Integer, primary_key=True)
     symbol = db.Column(db.String(10), nullable=False)
-    created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    updated = db.Column(db.DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created = db.Column(db.DateTime, default=datetime.utcnow)
+    updated = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     daily_bars = db.relationship(
         "DailyBar", backref="symbol", lazy="dynamic", cascade="all, delete-orphan"
     )
