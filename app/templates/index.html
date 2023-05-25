@@ -2,8 +2,6 @@
 {% block content %}
 <body>
 
-
-
   <div class="col-lg-8 mx-auto p-4 py-md-5">
     <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
       <span class="fs-4">Market Data</span>
@@ -16,8 +14,6 @@
         Only includes calls to the "Daily" endpoint for last 250 trading days,
         but any other configuration can be implemented and displayed as requested.
       </p>
-
-
 
       <hr class="col-3 col-md-2 mb-5" />
 
@@ -70,9 +66,9 @@
 
 
     </main>
-    <footer class="pt-5 my-5 text-body-secondary border-top">
-      Created by the Javier Garcia &middot; &copy; 2023
-    </footer>
+
+    {% include "footer.html" %}
+
   </div>
 
   {% endblock %}

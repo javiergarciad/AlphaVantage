@@ -18,11 +18,3 @@ def test_db():
     except:
         return False, "Unresponsive"
 
-
-def start_new_db():
-    """
-    Creates a new database
-    """
-    db.create_all()
-    db.session.commit()
-    return True

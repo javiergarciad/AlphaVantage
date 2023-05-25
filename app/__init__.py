@@ -3,14 +3,25 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from config import Config
 from flask_bootstrap import Bootstrap5
-from flask_migrate import upgrade
 
-app = Flask(__name__)
-app.config.from_object(Config)
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
-bootstrap = Bootstrap5(app)
 
-# https://stackoverflow.com/questions/74206531/flask-migrate-upgrade-fails-because-the-application-needs-to-run-code-that-modif
+db = SQLAlchemy()
+migrate = Migrate()
+bootstrap = Bootstrap5()
 
-from app import routes
+
+def create_app(config_class=Config):
+    app = Flask(__name__)
+    app.config.from_object(config_class)
+
+    db.init_app(app)
+    migrate.init_app(app)
+    bootstrap.init_app(app)
+
+    from app.main import bp as main_bp
+    app.register_blueprint(main_bp)
+
+    return app
+
+
+from app import models
