@@ -1,16 +1,21 @@
 import os
 from pathlib import Path
-import secrets
+from dotenv import load_dotenv
+
+BASEDIR = str(Path(__file__).parent.absolute())
+load_dotenv(Path(BASEDIR, '.env'))
 
 
 class Config(object):
-    # generate a secret key each time the server is iniciated.
-    # this is suitable here becasuse we are nsecrets.token_hex(16)ot storing sessions
+    # Flask secret
     SECRET_KEY = '9df31cad3eb2f66386575da6dd6641ae'
+
     # Alpha Advantage api key
-    API_KEY = os.environ.get("API_KEY") or None
+    API_KEY = os.getenv("API_KEY")
+
     # Sqlite database configuration
     DB_NAME = "app.db"
     DB_ENGINE = "sqlite3"
-    SQLALCHEMY_DATABASE_URI = f"sqlite:///{Path(__file__).parent.absolute()}/{DB_NAME}"
+    SQLALCHEMY_DATABASE_URI = f"sqlite:///{BASEDIR}/{DB_NAME}"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+

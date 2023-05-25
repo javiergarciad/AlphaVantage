@@ -24,6 +24,10 @@ class DailyBar(Base):
     low = db.Column(DECIMAL(10, 6), nullable=False)
     close = db.Column(DECIMAL(10, 6), nullable=False)
     volume = db.Column(db.Integer, nullable=False)
+    created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    updated = db.Column(db.DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+
 
     def __repr__(self):
         return f"{self.date} - {self.symbol}: O:{self.open:.2f}, H:{self.high:.2f}, \
@@ -37,6 +41,8 @@ class Symbol(Base):
     """
     id = db.Column(db.Integer, primary_key=True)
     symbol = db.Column(db.String(10), nullable=False)
+    created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    updated = db.Column(db.DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
     daily_bars = db.relationship(
         "DailyBar", backref="symbol", lazy="dynamic", cascade="all, delete-orphan"
     )
