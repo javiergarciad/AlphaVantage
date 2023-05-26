@@ -30,28 +30,6 @@ def index():
     )
 
 
-@bp.route("/add_ticket", methods=["POST"])
-def add_ticket():
-    """
-    Insert one ticket in the symbols table if it does not exists
-    """
-    ticket = request.form.get("ticket").upper()
-    ticket_in_bd = db.session.execute(
-        db.select(Symbol).filter_by(symbol=ticket)
-    ).first()
-
-    if ticket_in_bd is None:
-        new_symbol = Symbol(
-            symbol=ticket, created=datetime.utcnow(), updated=datetime.utcnow()
-        )
-        db.session.add(new_symbol)
-        db.session.commit()
-        flash(f"The ticket '{ticket}' succesfully added to the database", 'success')
-    else:
-        flash(f"The ticket '{ticket}' already exists in the database", 'danger')
-
-    return redirect("/", code=302)
-
 
 
 ########################################################################
@@ -83,4 +61,39 @@ def tickets_info():
             ans.append({"ticket": s.symbol, "bars": bars, "updated": updated})
 
     return jsonify(ans)
+
+
+@bp.route("/api/delete_ticket", methods=["POST"])
+def delete_ticket():
+    ticket = request.form.get("ticket").upper()
+    stmt = sqlalchemy.delete(Symbol).where(Symbol.symbol == ticket)
+    db.session.execute(stmt)
+    db.session.commit()
+
+    return jsonify({"ticket": ticket, "status": "success", "action": "delete"})
+
+
+@bp.route("/api/add_ticket", methods=["POST"])
+def add_ticket():
+    """
+    Insert one ticket in the symbols table if it does not exists
+    """
+    ticket = request.form.get("ticket").upper()
+    ticket_in_bd = db.session.execute(
+        db.select(Symbol).filter_by(symbol=ticket)
+    ).first()
+
+    if ticket_in_bd is None:
+        new_symbol = Symbol(
+            symbol=ticket, created=datetime.utcnow(), updated=datetime.utcnow()
+        )
+        db.session.add(new_symbol)
+        db.session.commit()
+        # flash(f"The ticket '{ticket}' succesfully added to the database", 'success')
+        return jsonify({"ticket": ticket, "status": "success", "action": "add"})
+    else:
+        # flash(f"The ticket '{ticket}' already exists in the database", 'danger')
+        return jsonify({"ticket": ticket, "status": "fail", "action": "add"})
+
+
 

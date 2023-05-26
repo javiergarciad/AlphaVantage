@@ -49,13 +49,9 @@
           <h2 class="text-body-emphasis">Symbols</h2>
           <p>Manage your symbols here.</p>
 
-          {{ render_form(tickets_form, form_type="inline", action="add_ticket", method="Post") }}
-
+          {{ render_form(tickets_form, id="add_ticket_form", form_type="inline") }}
           <br>
-
-
-          <table id="tickets_table" class="display" style="width:100%">
-
+          <table id="tickets_table" class="table table-sm table-borderless table-hover" style="width:100%">
           </table>
 
         </div>
