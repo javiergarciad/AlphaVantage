@@ -7,7 +7,7 @@ $(document).ready(function () {
     columns: [
       { data: "ticket", title: "Ticket" },
       { data: "bars", title: "# Bars" },
-      { data: "updated", title: "Last Updated" },
+      { data: "updated", title: "Last Bar" },
       { data: "", title: "Actions" },
     ],
     columnDefs: [

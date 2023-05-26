@@ -11,14 +11,13 @@ def db_info():
     url = Config.SQLALCHEMY_DATABASE_URI
     symbols = len(Symbol.query.all())
     records = len(DailyBar.query.all())
-    # last_update = db.session.execute(DailyBar.updated).scalar()
-    # .order_by(sqlalchemy.desc(DailyBar.updated))
-    # .first()
+    stmt = db.select(DailyBar.updated).order_by(sqlalchemy.desc(DailyBar.updated))
+    last_update = db.session.execute(stmt).scalar()
 
     return {
         "url": url,
         "symbols": symbols,
         "records": records,
-        "last_update": "TO DO",
+        "last_update": last_update,
     }
 
