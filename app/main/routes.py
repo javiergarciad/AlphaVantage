@@ -133,13 +133,12 @@ def add_ticket():
 @bp.route("/api/export_data/<filename>", methods=["POST", "GET"])
 def export_data(filename):
     """
-    Export the data from the database
+    Export the data from the database to a csv file
     """
 
     #  Get the data from the database
-    ticket = request.form.get("ticket").upper()
-    bars = get_daily_bars_in_db(ticket)
-
+    ticket = filename.split(".")[0]
+    bars = get_daily_bars_in_db(ticket.upper())
     file_path = Path(tempfile.gettempdir(), str(filename)).absolute()
 
     # Create CSV file
