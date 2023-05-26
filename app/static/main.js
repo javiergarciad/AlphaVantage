@@ -17,6 +17,7 @@ $(document).ready(function () {
         data: null,
         defaultContent:
           '<button id="delete-botton" type="button" class="btn btn-sml"><span class="bi-trash"></span></button>',
+          '<button id="delete-botton" type="button" class="btn btn-sml"><span class="bi-trash"></span></button>',
       },
       {
         defaultContent: "N/A",
