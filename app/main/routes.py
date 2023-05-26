@@ -1,25 +1,55 @@
 from datetime import datetime
-from flask import jsonify, redirect, render_template, request
-from flask import flash
+
 import sqlalchemy
+from flask import flash, jsonify, redirect, render_template, request
+
 from app import db
 from app.main import bp
-from app.main.forms import DatabaseForm, TicketsForm
-from app.main.tools import db_info
+from app.main.forms import AddTicketsForm, DatabaseForm
 from app.models import DailyBar, Symbol
 
 
 @bp.route("/", methods=["GET", "POST"])
 def index():
+    # forms
+    tickets_form = AddTicketsForm()
     db_form = DatabaseForm()
-    tickets_form = TicketsForm()
 
-    if request.method == "POST" and db_form.validate():
+    #  If the database form is submitted
+    if db_form.validate_on_submit():
+        #  If the database form is submitted and the delete button is pressed
         if "delete" in request.form.keys():
-            print("delete")
-        elif "update" in request.form.keys():
-            print("update")
+            #  Delete the database
+            print("Deleting database")
+            # db.drop_all()
+            # db.create_all()
+            # flash("Database deleted", "success" )
+            # return redirect("/")
 
+        #  If the database form is submitted and the update button is pressed
+        elif "update" in request.form.keys():
+            #  Update the database
+            print("Updating database")
+            # db.drop_all()
+            # db.create_all()
+            # flash("Database updated", "success")
+            # return redirect("/")
+
+    #  If the add ticket form is submitted
+    if tickets_form.validate_on_submit():
+        #  If the add ticket form is submitted and the add button is pressed
+        if "add" in request.form.keys():
+            #  Add the ticket to the database
+            ticket = tickets_form.ticket.data.upper()
+            new_symbol = Symbol(
+                symbol=ticket, created=datetime.utcnow(), updated=datetime.utcnow()
+            )
+            db.session.add(new_symbol)
+            db.session.commit()
+            flash(f"Ticket '{ticket}' succesfully added to the database", 'success')
+            return redirect("/")
+
+    # render  the index page
     return render_template(
         "index.html",
         title="Alpha Vantage",
@@ -28,8 +58,6 @@ def index():
         db_form=db_form,
         tickets_form=tickets_form,
     )
-
-
 
 
 ########################################################################
@@ -54,7 +82,7 @@ def tickets_info():
 
         tickets_bars = db.session.execute(stmt).all()
         if len(tickets_bars) == 0:
-            ans.append({"ticket": s.symbol, "bars": 0, "updated": 'N/A'})
+            ans.append({"ticket": s.symbol, "bars": 0, "updated": "N/A"})
         else:
             bars = len(tickets_bars)
             updated = tickets_bars[0].date
@@ -69,8 +97,7 @@ def delete_ticket():
     stmt = sqlalchemy.delete(Symbol).where(Symbol.symbol == ticket)
     db.session.execute(stmt)
     db.session.commit()
-
-    return jsonify({"ticket": ticket, "status": "success", "action": "delete"})
+    return jsonify({"ticket": ticket, "status": True, "action": "delete"})
 
 
 @bp.route("/api/add_ticket", methods=["POST"])
@@ -78,7 +105,9 @@ def add_ticket():
     """
     Insert one ticket in the symbols table if it does not exists
     """
+
     ticket = request.form.get("ticket").upper()
+
     ticket_in_bd = db.session.execute(
         db.select(Symbol).filter_by(symbol=ticket)
     ).first()
@@ -90,10 +119,7 @@ def add_ticket():
         db.session.add(new_symbol)
         db.session.commit()
         # flash(f"The ticket '{ticket}' succesfully added to the database", 'success')
-        return jsonify({"ticket": ticket, "status": "success", "action": "add"})
+        return jsonify({"ticket": ticket, "status": True, "action": "add"})
     else:
         # flash(f"The ticket '{ticket}' already exists in the database", 'danger')
-        return jsonify({"ticket": ticket, "status": "fail", "action": "add"})
-
-
-
+        return jsonify({"ticket": ticket, "status": False, "action": "add"})

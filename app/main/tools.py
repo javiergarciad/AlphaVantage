@@ -21,3 +21,4 @@ def db_info():
         "last_update": last_update,
     }
 
+
