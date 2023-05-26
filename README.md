@@ -48,11 +48,13 @@
 
 Simple example of flask backend for downloading stock EOD data from Yahoo. This script will create and update a SQlite database with last year EOD prices for a group of stocks, using Yahoo Finances data.
 
-This is a very basic example, not suitable for production enviroments. Many logics are not implemented.
+You can connect to the SQLite database using any external tool to use the data, or you can download CSV file per symbol. This version only download last year data.
+
+This is a very basic example, not suitable for production enviroments. Many logics are not implemented. Feel free to clone it and play with it.
 
 ## :sparkles: Features ##
 
-:heavy_check_mark: Download EOD data.\
+:heavy_check_mark: Download 1yr EOD data.\
 :heavy_check_mark: SQLite database you can access.\
 :heavy_check_mark: Export to CSV.
 
