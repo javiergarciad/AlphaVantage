@@ -36,7 +36,8 @@ $(document).ready(function () {
   $("#tickets_table tbody").on("click", "#delete-botton", function () {
     var row = table.row($(this).parents("tr")).data();
     $.post("/api/delete_ticket", { ticket: row.ticket }, function (data) {
-      table.ajax.reload();
+      //table.ajax.reload();
+      location.reload();
     });
   });
 });

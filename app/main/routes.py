@@ -1,12 +1,12 @@
 from datetime import datetime
 
 import sqlalchemy
-from flask import flash, jsonify, redirect, render_template, request
+from flask import flash, jsonify, redirect, render_template, request, url_for
 
 from app import db
 from app.main import bp
 from app.main.forms import AddTicketsForm, DatabaseForm
-from app.main.tools import db_info
+from app.main.tools import db_info, get_daily_bars_in_db, tickets_in_db, update_database
 from app.models import DailyBar, Symbol
 
 
@@ -22,19 +22,26 @@ def index():
         if "delete" in request.form.keys():
             #  Delete the database
             print("Deleting database")
-            # db.drop_all()
-            # db.create_all()
-            # flash("Database deleted", "success" )
-            # return redirect("/")
+            db.drop_all()
+            db.create_all()
+            flash("Database restarted", "success")
+            return redirect("/")
 
         #  If the database form is submitted and the update button is pressed
         elif "update" in request.form.keys():
             #  Update the database
-            print("Updating database")
-            # db.drop_all()
-            # db.create_all()
-            # flash("Database updated", "success")
-            # return redirect("/")
+            # period = db_form.period.data
+
+            # Hard coding this for the open source version
+            period = "1y"
+            update = update_database(period)
+
+            # count how many successfully updated
+            errors = [x["ticket"] for x in update if x["success"] == False]
+            sucess = [x["ticket"] for x in update if x["success"] == True]
+            flash(f"Database updated. Errors with: {errors}")
+
+            return redirect(url_for("main.index"))
 
     #  If the add ticket form is submitted
     if tickets_form.validate_on_submit():
@@ -47,10 +54,8 @@ def index():
             )
             db.session.add(new_symbol)
             db.session.commit()
-            flash(f"Ticket '{ticket}' succesfully added to the database", 'success')
-            return redirect("/")
-
-
+            flash(f"Ticket '{ticket}' succesfully added to the database", "success")
+            return redirect(url_for("main.index"))
 
     # render  the index page
     return render_template(
@@ -71,25 +76,16 @@ def tickets_info():
     """
     Return json info of tickets in the database
     """
-    tickets = db.session.execute(sqlalchemy.select(Symbol)).scalars()
-    if tickets is None:
-        return []
-
+    tickets = tickets_in_db()
     ans = []
     for s in tickets:
-        stmt = (
-            sqlalchemy.select(DailyBar)
-            .where(DailyBar.symbol == s.symbol)
-            .order_by(DailyBar.date.desc())
-        )
-
-        tickets_bars = db.session.execute(stmt).all()
-        if len(tickets_bars) == 0:
-            ans.append({"ticket": s.symbol, "bars": 0, "updated": "N/A"})
+        bars = get_daily_bars_in_db(s)
+        if len(bars) == 0:
+            ans.append({"ticket": s, "bars": 0, "updated": "N/A"})
         else:
-            bars = len(tickets_bars)
-            updated = tickets_bars[0].date
-            ans.append({"ticket": s.symbol, "bars": bars, "updated": updated})
+            total_bars = len(bars)
+            updated = bars[0].date
+            ans.append({"ticket": s, "bars": total_bars, "updated": updated})
 
     return jsonify(ans)
 
@@ -99,7 +95,10 @@ def delete_ticket():
     ticket = request.form.get("ticket").upper()
     stmt = sqlalchemy.delete(Symbol).where(Symbol.symbol == ticket)
     db.session.execute(stmt)
+    stmt = sqlalchemy.delete(DailyBar).where(DailyBar.symbol == ticket)
+    db.session.execute(stmt)
     db.session.commit()
+
     return jsonify({"ticket": ticket, "status": True, "action": "delete"})
 
 

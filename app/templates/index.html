@@ -41,7 +41,7 @@
 
           <form method="post">
             {{ db_form.csrf_token() }}
-            {{ render_field(db_form.start) }}
+
             {{ render_field(db_form.delete, button_style='danger') }}
             {{ render_field(db_form.update, button_style='success') }}
           </form>

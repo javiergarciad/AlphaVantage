@@ -28,7 +28,7 @@ class DailyBar(Base):
     def __repr__(self):
         return f"{self.date} - {self.symbol}: O:{self.open:.2f}, H:{self.high:.2f}, \
             L:{self.low:.2f}, C:{self.close:.2f}, Vol:{self.volume:.0f}, \
-            Last Updated: {self.last_updated:%d-%m-%Y %H:%M:%S}"
+            Last Updated: {self.updated:%d-%m-%Y %H:%M:%S}"
 
 
 class Symbol(Base):
@@ -39,7 +39,6 @@ class Symbol(Base):
     symbol = db.Column(db.String(10), nullable=False)
     created = db.Column(db.DateTime, default=datetime.utcnow)
     updated = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    daily_bars = db.relationship("DailyBar")
 
     def __repr__(self):
         return f"{self.symbol}"
