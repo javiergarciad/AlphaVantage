@@ -50,9 +50,9 @@ Simple example of flask backend for downloading stock EOD data from Yahoo. This 
 
 ## :sparkles: Features ##
 
-:heavy_check_mark: Download EOD data.;\
-:heavy_check_mark: SQLite database you can access.;\
-:heavy_check_mark: Export to CSV;
+:heavy_check_mark: Download EOD data.\
+:heavy_check_mark: SQLite database you can access.\
+:heavy_check_mark: Export to CSV.
 
 ## :rocket: Technologies ##
 
@@ -77,12 +77,12 @@ $ git clone https://github.com/javiergarciad/eod
 $ cd eod
 
 # Install dependencies
-$ yarn
+$ virtualenv .venv -f requirements.txt
 
 # Run the project
-$ yarn start
+$ flask run
 
-# The server will initialize in the <http://localhost:3000>
+# The server will initialize in the <http://localhost:5000>
 ```
 
 ## :memo: License ##
