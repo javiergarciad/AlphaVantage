@@ -1,39 +1,39 @@
-<div align="center" id="top"> 
-  <img src="./.github/app.gif" alt="AlphaVantage" />
+<div align="center" id="top">
+  <img src="./.github/app.gif" alt="Eod" />
 
   &#xa0;
 
-  <!-- <a href="https://alphavantage.netlify.app">Demo</a> -->
+  <!-- <a href="https://eod.netlify.app">Demo</a> -->
 </div>
 
-<h1 align="center">AlphaVantage</h1>
+<h1 align="center">EOD Stock Data Downloader</h1>
 
 <p align="center">
-  <img alt="Github top language" src="https://img.shields.io/github/languages/top/javiergarciad/alphavantage?color=56BEB8">
+  <img alt="Github top language" src="https://img.shields.io/github/languages/top/javiergarciad/eod?color=56BEB8">
 
-  <img alt="Github language count" src="https://img.shields.io/github/languages/count/javiergarciad/alphavantage?color=56BEB8">
+  <img alt="Github language count" src="https://img.shields.io/github/languages/count/javiergarciad/eod?color=56BEB8">
 
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/javiergarciad/alphavantage?color=56BEB8">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/javiergarciad/eod?color=56BEB8">
 
-  <img alt="License" src="https://img.shields.io/github/license/javiergarciad/alphavantage?color=56BEB8">
+  <img alt="License" src="https://img.shields.io/github/license/javiergarciad/eod?color=56BEB8">
 
-  <!-- <img alt="Github issues" src="https://img.shields.io/github/issues/javiergarciad/alphavantage?color=56BEB8" /> -->
+  <!-- <img alt="Github issues" src="https://img.shields.io/github/issues/javiergarciad/eod?color=56BEB8" /> -->
 
-  <!-- <img alt="Github forks" src="https://img.shields.io/github/forks/javiergarciad/alphavantage?color=56BEB8" /> -->
+  <!-- <img alt="Github forks" src="https://img.shields.io/github/forks/javiergarciad/eod?color=56BEB8" /> -->
 
-  <!-- <img alt="Github stars" src="https://img.shields.io/github/stars/javiergarciad/alphavantage?color=56BEB8" /> -->
+  <!-- <img alt="Github stars" src="https://img.shields.io/github/stars/javiergarciad/eod?color=56BEB8" /> -->
 </p>
 
 <!-- Status -->
 
-<!-- <h4 align="center"> 
-	🚧  AlphaVantage 🚀 Under construction...  🚧
-</h4> 
+<!-- <h4 align="center">
+	🚧  Eod 🚀 Under construction...  🚧
+</h4>
 
 <hr> -->
 
 <p align="center">
-  <a href="#dart-about">About</a> &#xa0; | &#xa0; 
+  <a href="#dart-about">About</a> &#xa0; | &#xa0;
   <a href="#sparkles-features">Features</a> &#xa0; | &#xa0;
   <a href="#rocket-technologies">Technologies</a> &#xa0; | &#xa0;
   <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
@@ -46,36 +46,35 @@
 
 ## :dart: About ##
 
-Describe your project
+Simple example of flask backend for downloading stock EOD data from Yahoo. This script will create and update a SQlite database with last year EOD prices for a group of stocks, using Yahoo Finances data.
 
 ## :sparkles: Features ##
 
-:heavy_check_mark: Feature 1;\
-:heavy_check_mark: Feature 2;\
-:heavy_check_mark: Feature 3;
+:heavy_check_mark: Download EOD data.;\
+:heavy_check_mark: SQLite database you can access.;\
+:heavy_check_mark: Export to CSV;
 
 ## :rocket: Technologies ##
 
 The following tools were used in this project:
 
-- [Expo](https://expo.io/)
-- [Node.js](https://nodejs.org/en/)
-- [React](https://pt-br.reactjs.org/)
-- [React Native](https://reactnative.dev/)
-- [TypeScript](https://www.typescriptlang.org/)
+- [Python](https://www.python.org/)
+- [JQuery](https://jquery.com/)
+- [Boostrap5](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
+
 
 ## :white_check_mark: Requirements ##
 
-Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) and [Node](https://nodejs.org/en/) installed.
+Before starting :checkered_flag:, you need to have [Python 3.10](https://www.python.org/) installed.
 
 ## :checkered_flag: Starting ##
 
 ```bash
 # Clone this project
-$ git clone https://github.com/javiergarciad/alphavantage
+$ git clone https://github.com/javiergarciad/eod
 
 # Access
-$ cd alphavantage
+$ cd eod
 
 # Install dependencies
 $ yarn
