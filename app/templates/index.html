@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% from 'bootstrap5/form.html' import render_field, render_form, render_hidden_errors %}
+{% from 'bootstrap5/form.html' import render_field, render_form, render_hidden_errors, render_form_row %}
 {% from 'bootstrap5/utils.html' import render_messages %}
 {% from 'bootstrap5/table.html' import render_table %}
 
@@ -37,8 +37,11 @@
             <dt class="col-sm-3">Last update</dt>
             <dd class="col-sm-9">{{ db_info['last_update'] }}</dd>
           </dl>
+
+
           <form method="post">
             {{ db_form.csrf_token() }}
+            {{ render_field(db_form.start) }}
             {{ render_field(db_form.delete, button_style='danger') }}
             {{ render_field(db_form.update, button_style='success') }}
           </form>
@@ -48,15 +51,11 @@
         <div class="col-md-6">
           <h2 class="text-body-emphasis">Symbols</h2>
           <p>Manage your symbols here.</p>
-
-
-          <form method="post">
-            {{ tickets_form.hidden_tag() }}
-            {{ render_hidden_errors(tickets_form) }}
-            {{ render_field(tickets_form.ticket) }}
-            {{ render_field(tickets_form.add) }}
-          </form>
-
+          <div class="col-md-6">
+            <form method="post">
+              {{ render_form(tickets_form, button_size="block" )}}
+            </form>
+          </div>
           <br>
           <table id="tickets_table" class="table table-sm table-borderless table-hover" style="width:100%">
           </table>

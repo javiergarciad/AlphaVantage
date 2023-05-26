@@ -6,6 +6,7 @@ from flask import flash, jsonify, redirect, render_template, request
 from app import db
 from app.main import bp
 from app.main.forms import AddTicketsForm, DatabaseForm
+from app.main.tools import db_info
 from app.models import DailyBar, Symbol
 
 
@@ -48,6 +49,8 @@ def index():
             db.session.commit()
             flash(f"Ticket '{ticket}' succesfully added to the database", 'success')
             return redirect("/")
+
+
 
     # render  the index page
     return render_template(

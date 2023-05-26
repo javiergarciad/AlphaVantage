@@ -73,6 +73,6 @@
 }
 
 .table-wrapper {
-    max-height: 300px;
-    overflow: auto;
-  }
+  max-height: 300px;
+  overflow: auto;
+}
