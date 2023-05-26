@@ -64,7 +64,7 @@ The following tools were used in this project:
 
 - [Python](https://www.python.org/)
 - [JQuery](https://jquery.com/)
-- [Boostrap5](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
+- [Bootstrap5](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
 
 
 ## :white_check_mark: Requirements ##
