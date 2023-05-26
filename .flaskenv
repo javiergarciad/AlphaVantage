@@ -1,2 +1,2 @@
-FLASK_APP=alpha_advantage.py
+FLASK_APP=eod.py
 FLASK_DEBUG=1

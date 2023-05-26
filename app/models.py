@@ -8,10 +8,12 @@ class Base(db.Model):
     __abstract__ = True
     pass
 
+
 class DailyBar(Base):
     """
     Represents a daily bar in the database.
     """
+
     __tablename__ = "daily_bar"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -35,6 +37,7 @@ class Symbol(Base):
     """
     Represents a symbol in the database.
     """
+
     id = db.Column(db.Integer, primary_key=True)
     symbol = db.Column(db.String(10), nullable=False)
     created = db.Column(db.DateTime, default=datetime.utcnow)

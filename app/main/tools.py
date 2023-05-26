@@ -1,7 +1,7 @@
 import datetime
 import os
 from time import sleep
-import requests
+
 import sqlalchemy
 from app import db
 from config import Config
