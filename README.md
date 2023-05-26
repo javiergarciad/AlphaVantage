@@ -80,9 +80,12 @@ $ git clone https://github.com/javiergarciad/eod
 # Access
 $ cd eod
 
-# Create and activate VirtualEnv
-$ virtualenv .env
+# Create VirtualEnv
+$ virtualenv .venv
+
+# Activate VirtualEnv
 $ source ./.venv/bin/activate
+# You should see something like: (.venv) $ at your terminal
 
 # Install dependencies
 $ pip install -r requirements.txt
