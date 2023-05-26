@@ -10,15 +10,21 @@
 <body>
   <div class="col-lg-10 mx-auto p-4 py-md-5">
     <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
-      <span class="fs-4">Market Data</span>
+      <span class="fs-4">Market Data from Yahoo</span>
     </header>
     <main>
-      <h1 class="text-body-emphasis">Market Data from Alpha Advantage</h1>
+      <h1 class="text-body-emphasis">Stock Market Data</h1>
       <p class="fs-5 col-md-8">
-        This script will update a SQlite database that you can query with any tool.
-        Only includes calls to the "Daily" endpoint for last 250 trading days,
-        but any other configuration can be implemented and displayed as requested.
+        This script will create and update a SQlite database with last
+        year EOD prices for a group of stocks, using Yahoo Finances data.
+        Database will be located at the root of the project, you can connect it using any
+        external tool.
       </p>
+      <em>This is an very basic example, not suitable for production enviroments. There are many logics not implemented.</em><br>
+      <em>Documentation is <a href="https://github.com/javiergarciad/AlphaVantage" target="_blank">here</a></em>
+      <!-- add link to documentation in github -->
+
+
 
       <hr class="col-4 col-md-2 mb-5" />
 
