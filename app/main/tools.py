@@ -14,14 +14,14 @@ def db_info():
     """
     Returns the database information
     """
-    url = Config.SQLALCHEMY_DATABASE_URI
+    location = Config.DB_LOCATION
     symbols = len(Symbol.query.all())
     records = len(DailyBar.query.all())
     stmt = db.select(DailyBar.updated).order_by(sqlalchemy.desc(DailyBar.updated))
     last_update = db.session.execute(stmt).scalar()
 
     return {
-        "url": url,
+        "location": location,
         "symbols": symbols,
         "records": records,
         "last_update": last_update,
