@@ -80,8 +80,12 @@ $ git clone https://github.com/javiergarciad/eod
 # Access
 $ cd eod
 
+# Create and activate VirtualEnv
+$ virtualenv .env
+$ source ./.venv/bin/activate
+
 # Install dependencies
-$ virtualenv .venv -f requirements.txt
+$ pip install -r requirements.txt
 
 # Run the project
 $ flask run
