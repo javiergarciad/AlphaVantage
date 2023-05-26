@@ -32,6 +32,9 @@ class DailyBar(Base):
             L:{self.low:.2f}, C:{self.close:.2f}, Vol:{self.volume:.0f}, \
             Last Updated: {self.updated:%d-%m-%Y %H:%M:%S}"
 
+    def to_list(self):
+        return [self.date, self.symbol, self.open, self.high, self.low, self.close, self.volume]
+
 
 class Symbol(Base):
     """

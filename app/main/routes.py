@@ -1,7 +1,10 @@
+import csv
 from datetime import datetime
-
+from pathlib import Path
+import tempfile
+import os
 import sqlalchemy
-from flask import flash, jsonify, redirect, render_template, request, url_for
+from flask import abort, flash, jsonify, redirect, render_template, request, send_file, url_for
 
 from app import db
 from app.main import bp
@@ -125,3 +128,34 @@ def add_ticket():
     else:
         # flash(f"The ticket '{ticket}' already exists in the database", 'danger')
         return jsonify({"ticket": ticket, "status": False, "action": "add"})
+
+
+@bp.route("/api/export_data/<filename>", methods=["POST", "GET"])
+def export_data(filename):
+    """
+    Export the data from the database
+    """
+
+    #  Get the data from the database
+    ticket = request.form.get("ticket").upper()
+    bars = get_daily_bars_in_db(ticket)
+
+    file_path = Path(tempfile.gettempdir(), str(filename)).absolute()
+
+    # Create CSV file
+    f = open(file_path, "w")
+
+    file_writer = csv.writer(f, quotechar='"', quoting=csv.QUOTE_MINIMAL)
+    # Write headers to CSV file
+    file_header = ["Date", "Symbol", "Open", "High", "Low", "Close", "Volume"]
+    file_writer.writerow(file_header)
+    # Write data to CSV file
+    for bar in bars:
+        file_writer.writerow(bar.to_list())
+    f.close()
+
+    try:
+        print("export data")
+        return send_file(file_path, as_attachment=True, download_name=f"{ticket}.csv")
+    except FileNotFoundError:
+        abort(404)
