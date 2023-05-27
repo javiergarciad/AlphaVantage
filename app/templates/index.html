@@ -38,7 +38,7 @@
       <hr class="col-4 col-md-2 mb-5" />
 
       <div class="row g-5">
-        <div class="col-md-6">
+        <div class="col-md-4">
           <h2 class="text-body-emphasis">Database</h2>
           <p>Some information about the database.</p>
 
@@ -56,14 +56,13 @@
 
           <form method="post">
             {{ db_form.csrf_token() }}
-
             {{ render_field(db_form.delete, button_style='danger') }}
             {{ render_field(db_form.update, button_style='success') }}
           </form>
           </p>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-8">
           <h2 class="text-body-emphasis">Symbols</h2>
           <p>Manage your symbols here.</p>
           <div class="col-md-6">
@@ -78,15 +77,12 @@
         </div>
       </div>
 
-      <hr class="col-3 col-md-2 mb-5" />
+
 
       <div class="row g-5">
-
+        <br><br><br><br><br><br>
 
       </div>
-
-
-      <form id="download"></form>
 
     </main>
 

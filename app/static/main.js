@@ -28,7 +28,7 @@ $(document).ready(function () {
     paging: false,
     ordering: false,
     info: false,
-    scrollY: "200px",
+    scrollY: "600px",
     scrollCollapse: true,
     searching: false,
   });
